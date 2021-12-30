@@ -119,7 +119,7 @@ def tela_login():
 
 
         def validar():
-            if user.get() == "" or password.get() == "" or (user.get()).isspace() or (password.get()).isspace():
+            if not (user.get()).isidentifier() or password.get() == "" or (password.get()).isspace():
                 status = messagebox.showinfo(title=" ", message=" Algo deu errado, tente novamente.")
                 return
             else:
@@ -127,14 +127,10 @@ def tela_login():
 
         def status():
             status = messagebox.askyesno(title=" ", message="Deseja continuar ?")
-            if status == False:
-                return
-            else:
+            if status == True:
                 # VALIDAÇÃO DO QUE FOI DIGITADO
                 validando = validar()
-                if validando == None:
-                    return
-                else:
+                if validando == "pode cadastrar":
                     if password.get() != confirm_senha.get():
                         status = messagebox.showinfo(title="", message="Senhas diferentes.")
                     else:
@@ -168,6 +164,7 @@ def tela_login():
                                     status = messagebox.showinfo(title="", message="Cadastrado com sucesso!")
                             else:
                                 messagebox.showinfo(title="", message="Ocorreu um erro ao conectar com o banco de dados.")
+
         # INTERFACE GRÁFICA DA TELA 2
         tela = Tk()
 
@@ -224,7 +221,7 @@ def tela_login():
         tela_3()
 
     def validar():
-        if user.get() == "" or password.get() == "" or (user.get()).isspace() or (password.get()).isspace():
+        if not (user.get()).isidentifier() or password.get() == "" or (password.get()).isspace():
             status = messagebox.showinfo(title=" ", message=" Algo deu errado, tente novamente.")
             return
         else:
@@ -238,9 +235,7 @@ def tela_login():
             messagebox.showinfo(title=" ", message="Ocorreu um erro ao conectar com o banco de dados.")
         else:
             status = validar()
-            if status == None:
-                return
-            else:
+            if status == "Pode efetuar login":
                 cursor = con.cursor()
                 cursor.execute('select * from contas;')
                 linhas = cursor.fetchall()
