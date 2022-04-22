@@ -1,4 +1,4 @@
-A largura dos elementos na tela pode ser definidar das seguintes formas:
+A largura dos elementos na tela pode ser definida das seguintes formas:
 
     user = Entry(tela, width=25)
     user.place(x=100,y=40)
